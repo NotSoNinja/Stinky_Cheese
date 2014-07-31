@@ -24,7 +24,8 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-public class SettingsHost {
+public final class SettingsHost {
+	private static SettingsHost settingsHostReference;
 	
 	//Config file
 	public static final String DEFAULT_CFGPATH = "settings.cfg";
@@ -77,7 +78,7 @@ public class SettingsHost {
 	FileInputStream in;
 	boolean internetConnected;
 	
-	public SettingsHost(String filePath){
+	private SettingsHost(String filePath){
 		//Magic Code!  Thanks, StackOverflow!
 		installDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		//setup
@@ -234,6 +235,14 @@ public class SettingsHost {
 		internetConnected = (ipv4 != null) || (ipv6 != null);
 		//System.out.println(this.toString());
 	}
+	
+	public static SettingsHost getInstance(){
+		if(settingsHostReference == null){
+			settingsHostReference = new SettingsHost(DEFAULT_CFGPATH);
+		}
+		return settingsHostReference;
+	}
+	
 	//prints toString to a file
 	public boolean saveSettings(){
 		FileOutputStream out;

@@ -66,16 +66,14 @@ public class Settings extends JDialog{
 	private JRadioButton rdbtnEnglish;
 	private JToggleButton btnTest;
 	private JToggleButton toggleButton;
-	SettingsHost mem;
 	Settings thiswindow;
 	
 
 	/**
 	 * Create the dialog.
 	 */
-	public Settings(SettingsHost s) {
+	public Settings() {
 		thiswindow = this;
-		mem = s;
 		setBounds(100, 100, 450, 300);
 		setTitle("Settings");
 		getContentPane().setLayout(new BorderLayout());
@@ -103,7 +101,7 @@ public class Settings extends JDialog{
 				panel.add(rdbtnNepali, "cell 0 2");
 				languageGroup.add(rdbtnNepali);
 				
-				if(mem.getLanguage() == "nepali"){
+				if(SettingsHost.getInstance().getLanguage() == "nepali"){
 					rdbtnNepali.setSelected(true);
 				}else{
 					rdbtnEnglish.setSelected(true);
@@ -115,7 +113,7 @@ public class Settings extends JDialog{
 			
 			
 				txtName = new JTextField();
-				txtName.setText(mem.getName());
+				txtName.setText(SettingsHost.getInstance().getName());
 				panel.add(txtName, "cell 1 3,growx");
 				txtName.setColumns(10);
 			
@@ -125,15 +123,15 @@ public class Settings extends JDialog{
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
-						mem.setAllDefaults();
-						rdbtnEnglish.setSelected(mem.getLanguage().equalsIgnoreCase(SettingsHost.DEFAULT_LANGUAGE));
-						txtName.setText(mem.getName());
-						txtSavelocation_1.setText(mem.getVideoSave());
-						txtSavelocation.setText(mem.getStillSaveLocation());
-						vslider.setValue(mem.getVidResNum());
-						checkBox.setSelected(mem.getAudioCapture());
-						svolslider.setValue(mem.getSendVolume());
-						rvolslider.setValue(mem.getRecieveVolume());
+						SettingsHost.getInstance().setAllDefaults();
+						rdbtnEnglish.setSelected(SettingsHost.getInstance().getLanguage().equalsIgnoreCase(SettingsHost.DEFAULT_LANGUAGE));
+						txtName.setText(SettingsHost.getInstance().getName());
+						txtSavelocation_1.setText(SettingsHost.getInstance().getVideoSave());
+						txtSavelocation.setText(SettingsHost.getInstance().getStillSaveLocation());
+						vslider.setValue(SettingsHost.getInstance().getVidResNum());
+						checkBox.setSelected(SettingsHost.getInstance().getAudioCapture());
+						svolslider.setValue(SettingsHost.getInstance().getSendVolume());
+						rvolslider.setValue(SettingsHost.getInstance().getRecieveVolume());
 						//TODO: set aSendComboBox
 						//TODO: set aRecComboBox
 						//TODO: set comboBox
@@ -152,13 +150,13 @@ public class Settings extends JDialog{
 					vslider = new JSlider(0,SettingsHost.RESOLUTIONS.length - 1);
 					vslider.setMajorTickSpacing(1);
 					vslider.setSnapToTicks(true);
-					vslider.setValue(mem.getVidResNum());
+					vslider.setValue(SettingsHost.getInstance().getVidResNum());
 					
 					panel.add(vslider, "flowx,cell 0 0");
 				
 					SpinnerListModel vResolutions = new SpinnerListModel(SettingsHost.RESOLUTIONS);
 					vspinner = new JSpinner(vResolutions);
-					vspinner.setValue((mem.getVidRes()));
+					vspinner.setValue((SettingsHost.getInstance().getVidRes()));
 					panel.add(vspinner, "cell 1 0,growx,aligny center");
 					
 					vslider.addChangeListener(new ChangeListener(){
@@ -182,7 +180,7 @@ public class Settings extends JDialog{
 				}
 				{
 					checkBox = new JCheckBox("Capture Audio with Video");
-					checkBox.setSelected(mem.getAudioCapture());
+					checkBox.setSelected(SettingsHost.getInstance().getAudioCapture());
 					panel.add(checkBox, "cell 0 1");
 				}
 				{
@@ -191,7 +189,7 @@ public class Settings extends JDialog{
 				}
 				{
 					txtSavelocation_1 = new JTextField();
-					txtSavelocation_1.setText(mem.getVideoSave());
+					txtSavelocation_1.setText(SettingsHost.getInstance().getVideoSave());
 					panel.add(txtSavelocation_1, "cell 0 3,growx");
 					txtSavelocation_1.setColumns(10);
 				}
@@ -199,7 +197,7 @@ public class Settings extends JDialog{
 					JButton btnDefault_1 = new JButton("Default");
 					btnDefault_1.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent arg0) {
-							txtSavelocation_1.setText(mem.getDefaultSavePath());
+							txtSavelocation_1.setText(SettingsHost.getInstance().getDefaultSavePath());
 						}
 					});
 					panel.add(btnDefault_1, "cell 1 3,growx");
@@ -208,7 +206,7 @@ public class Settings extends JDialog{
 					JButton btnBrowse_1 = new JButton("Browse");
 					btnBrowse_1.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e) {
-							JFileChooser fc = new JFileChooser(mem.getVideoSave());
+							JFileChooser fc = new JFileChooser(SettingsHost.getInstance().getVideoSave());
 							fc.setDialogTitle("Browse");
 							fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 							fc.setMultiSelectionEnabled(false);
@@ -244,7 +242,7 @@ public class Settings extends JDialog{
 					JButton btnResetToDefaults = new JButton("Reset to Defaults");
 					btnResetToDefaults.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent arg0) {
-							txtSavelocation_1.setText(mem.getDefaultSavePath());
+							txtSavelocation_1.setText(SettingsHost.getInstance().getDefaultSavePath());
 							vslider.setValue(SettingsHost.DEFAULT_VRESNUM);
 							checkBox.setSelected(SettingsHost.DEFAULT_AUDIOCAP);
 						}
@@ -260,12 +258,12 @@ public class Settings extends JDialog{
 					pslider = new JSlider(0,SettingsHost.RESOLUTIONS.length - 1);
 					pslider.setMajorTickSpacing(1);
 					pslider.setSnapToTicks(true);
-					pslider.setValue(mem.getVidResNum());
+					pslider.setValue(SettingsHost.getInstance().getVidResNum());
 					panel.add(pslider, "cell 0 0,growx,aligny center");
 				
 					SpinnerListModel pResolutions = new SpinnerListModel(SettingsHost.RESOLUTIONS);
 					pspinner = new JSpinner(pResolutions);
-					pspinner.setValue((mem.getVidRes()));
+					pspinner.setValue((SettingsHost.getInstance().getVidRes()));
 					panel.add(pspinner, "cell 1 0,growx,aligny center");
 					
 					pslider.addChangeListener(new ChangeListener(){
@@ -301,7 +299,7 @@ public class Settings extends JDialog{
 				}
 				{
 					txtSavelocation = new JTextField();
-					txtSavelocation.setText(mem.getStillSaveLocation());
+					txtSavelocation.setText(SettingsHost.getInstance().getStillSaveLocation());
 					panel.add(txtSavelocation, "cell 0 2,growx");
 					txtSavelocation.setColumns(10);
 				}
@@ -309,7 +307,7 @@ public class Settings extends JDialog{
 					JButton btnDefault = new JButton("Default");
 					btnDefault.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent arg0) {
-							txtSavelocation.setText(mem.getDefaultSavePath());
+							txtSavelocation.setText(SettingsHost.getInstance().getDefaultSavePath());
 						}
 					});
 					panel.add(btnDefault, "cell 1 2,growx");
@@ -318,7 +316,7 @@ public class Settings extends JDialog{
 					JButton btnBrowse = new JButton("Browse");
 					btnBrowse.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e) {
-							JFileChooser fc = new JFileChooser(mem.getVideoSave());
+							JFileChooser fc = new JFileChooser(SettingsHost.getInstance().getVideoSave());
 							fc.setDialogTitle("Browse");
 							fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 							fc.setMultiSelectionEnabled(false);
@@ -342,7 +340,7 @@ public class Settings extends JDialog{
 				{
 					JButton btnResetToDefaults_1 = new JButton("Reset to Defaults");
 					pslider.setValue(SettingsHost.DEFAULT_SRESNUM);
-					txtSavelocation.setText(mem.getDefaultSavePath());
+					txtSavelocation.setText(SettingsHost.getInstance().getDefaultSavePath());
 					panel.add(btnResetToDefaults_1, "cell 0 7");
 				}
 			}
@@ -357,7 +355,7 @@ public class Settings extends JDialog{
 					svolslider = new JSlider(1,100);
 					svolslider.setMajorTickSpacing(1);
 					svolslider.setSnapToTicks(true);
-					svolslider.setValue(mem.getSendVolume());
+					svolslider.setValue(SettingsHost.getInstance().getSendVolume());
 					panel.add(svolslider, "cell 0 0,growx");
 				}
 				{
@@ -368,7 +366,7 @@ public class Settings extends JDialog{
 					rvolslider = new JSlider(1,100);
 					rvolslider.setMajorTickSpacing(1);
 					rvolslider.setSnapToTicks(true);
-					rvolslider.setValue(mem.getRecieveVolume());
+					rvolslider.setValue(SettingsHost.getInstance().getRecieveVolume());
 					panel.add(rvolslider, "cell 0 1,growx");
 				}
 				{
@@ -425,7 +423,7 @@ public class Settings extends JDialog{
 				panel.setLayout(new MigLayout("", "[grow][]", "[][][][][][][]"));
 				{
 					txtCurrentipv = new JTextField();
-					txtCurrentipv.setText(mem.getIPv4());
+					txtCurrentipv.setText(SettingsHost.getInstance().getIPv4());
 					txtCurrentipv.setEditable(false);
 					panel.add(txtCurrentipv, "cell 0 0,growx");
 					txtCurrentipv.setColumns(10);
@@ -434,7 +432,7 @@ public class Settings extends JDialog{
 					panel.add(lblCurrentIpvAddress, "cell 1 0");
 				
 					txtCurrentipv_1 = new JTextField();
-					txtCurrentipv_1.setText(mem.getIPv6());
+					txtCurrentipv_1.setText(SettingsHost.getInstance().getIPv6());
 					txtCurrentipv_1.setEditable(false);
 					panel.add(txtCurrentipv_1, "cell 0 1,growx");
 					txtCurrentipv_1.setColumns(10);
@@ -443,7 +441,7 @@ public class Settings extends JDialog{
 					panel.add(lblCurrentIpvAddress_1, "cell 1 1");
 				
 					txtSubnetmask = new JTextField();
-					txtSubnetmask.setText(mem.getSubnetMask());
+					txtSubnetmask.setText(SettingsHost.getInstance().getSubnetMask());
 					txtSubnetmask.setEditable(false);
 					panel.add(txtSubnetmask, "cell 0 2,growx");
 					txtSubnetmask.setColumns(10);
@@ -454,9 +452,9 @@ public class Settings extends JDialog{
 					JButton btnDetectSettings = new JButton("Detect Settings");
 					btnDetectSettings.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e) {
-							txtCurrentipv.setText(mem.detectIPv4());
-							txtCurrentipv_1.setText(mem.detectIPv6());
-							txtSubnetmask.setText(mem.detectSubnetMask());
+							txtCurrentipv.setText(SettingsHost.getInstance().detectIPv4());
+							txtCurrentipv_1.setText(SettingsHost.getInstance().detectIPv6());
+							txtSubnetmask.setText(SettingsHost.getInstance().detectSubnetMask());
 						}
 					});
 					panel.add(btnDetectSettings, "cell 0 4");
@@ -480,9 +478,9 @@ public class Settings extends JDialog{
 					JButton btnResetToDefaults_3 = new JButton("Reset to Defaults");
 					btnResetToDefaults_3.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e) {
-							txtCurrentipv.setText(mem.detectIPv4());
-							txtCurrentipv_1.setText(mem.detectIPv6());
-							txtSubnetmask.setText(mem.detectSubnetMask());
+							txtCurrentipv.setText(SettingsHost.getInstance().detectIPv4());
+							txtCurrentipv_1.setText(SettingsHost.getInstance().detectIPv6());
+							txtSubnetmask.setText(SettingsHost.getInstance().detectSubnetMask());
 						}
 					});
 					panel.add(btnResetToDefaults_3, "cell 0 6");

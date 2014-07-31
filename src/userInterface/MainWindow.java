@@ -79,7 +79,6 @@ public class MainWindow {
 	String uName;
 	private static final String CONTACTFILE = "contacts.txt";
 	JList<String> list;
-	private SettingsHost settings;
 
 	/**
 	 * Launch the application.
@@ -101,7 +100,6 @@ public class MainWindow {
 	 * Create the application.
 	 */
 	public MainWindow() {
-		settings = new SettingsHost(SettingsHost.DEFAULT_CFGPATH);
 		try {
 			contactlist = new ContactList(CONTACTFILE);
 		} catch (IOException e) {
@@ -224,9 +222,9 @@ public class MainWindow {
 		JMenu mnStinkycheese = new JMenu("StinkyCheese");
 		menuBar.add(mnStinkycheese);
 		
-		JMenuItem mntmSettings = new JMenuItem("Settings");
-		mntmSettings.addActionListener(new SettingsListener(settings));
-		mnStinkycheese.add(mntmSettings);
+		//JMenuItem mntmSettings = new JMenuItem("Settings");
+		//mntmSettings.addActionListener(new SettingsListener(SettingsHost.getInstance()));
+		//mnStinkycheese.add(mntmSettings);
 		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.addActionListener(new ExitListener(this));
@@ -253,7 +251,7 @@ public class MainWindow {
 		JMenuItem mntmDocumentation = new JMenuItem("Documentation");
 		mnHelp.add(mntmDocumentation);
 		
-		if(!settings.getInetConnected()){
+		if(!SettingsHost.getInstance().getInetConnected()){
 			tglbtnCall.setEnabled(false);
 			chckbxVideo.setEnabled(false);
 			txtrOutputtext.setEnabled(false);
@@ -272,7 +270,7 @@ public class MainWindow {
 	}
 	public void quit(){
 		int code = contactlist.save(CONTACTFILE);
-		if(!settings.saveSettings()){
+		if(!SettingsHost.getInstance().saveSettings()){
 			System.exit(4);
 		}
 		System.exit(code);
