@@ -16,19 +16,16 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 
 import utility.SettingsHost;
-
 public class SettingsListener implements ActionListener {
-	Settings s;
-	SettingsHost mem;
+	private Settings s;
 	
-	public SettingsListener(SettingsHost s){
-		mem = s;
+	public SettingsListener(){
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(s == null){
 			try {
-				Settings dialog = new Settings(mem);
+				Settings dialog = new Settings();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception ex) {
