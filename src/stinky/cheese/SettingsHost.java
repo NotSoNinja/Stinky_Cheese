@@ -83,7 +83,7 @@ public final class SettingsHost {
 		installDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		//setup
 		char c;
-        String s ="";
+        String s = "";
 		if(filePath != null){
 			cfgPath = filePath;
 		}else{

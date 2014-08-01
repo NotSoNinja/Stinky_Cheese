@@ -27,7 +27,7 @@ public class RemoveContactListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Contact c = parent.getListSelection();
-		System.out.println(c);
+		//System.out.println(c);
 		if(c == null){
 			parent.addOutputLine("No Contact Selected");
 		}else{
