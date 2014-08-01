@@ -62,6 +62,13 @@ import java.io.IOException;
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 
+import org.openimaj.image.DisplayUtilities;
+import org.openimaj.image.MBFImage;
+import org.openimaj.video.Video;
+import org.openimaj.video.VideoDisplay;
+import org.openimaj.video.capture.VideoCapture;
+import org.openimaj.video.capture.VideoCaptureException;
+
 import stinky.cheese.SettingsHost;
 import stinky.cheese.contacts.Contact;
 import stinky.cheese.contacts.ContactList;
@@ -199,7 +206,23 @@ public class MainWindow {
 		JToggleButton tglbtnRecordAudio = new JToggleButton("Record Audio");
 		panel_3.add(tglbtnRecordAudio);
 		
+		Video<MBFImage> video = null;
+    	
+    	try {
+			video = new VideoCapture(640, 320);
+		} catch (VideoCaptureException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	DisplayUtilities.ImageComponent screen = new DisplayUtilities.ImageComponent(true);
+    	screen.setAllowPanning(false);
+    	screen.setAllowZoom(false);
+    	
+    	VideoDisplay<MBFImage> display = VideoDisplay.createVideoDisplay(video, screen);
+		
 		JPanel panel_4 = new JPanel();
+		//panel_4.add(sceen);
 		frame.getContentPane().add(panel_4, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
