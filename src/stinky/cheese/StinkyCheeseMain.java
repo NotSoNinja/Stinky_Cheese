@@ -1,24 +1,14 @@
 package stinky.cheese;
 
-import java.awt.EventQueue;
-
 import stinky.cheese.gui.MainWindow;
 
 public class StinkyCheeseMain {
 
 	/**
-	 * Launch the application.
+	 * Launch the application and handle initializing any libraries.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		MainWindow window = new MainWindow();
+		window.frame.setVisible(true);
 	}
 }

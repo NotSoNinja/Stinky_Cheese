@@ -16,6 +16,8 @@ $RECYCLE.BIN/
 
 # Folder containing binary class files
 bin/
+.classpath
+.project
 
 # =========================
 # Operating System Files
