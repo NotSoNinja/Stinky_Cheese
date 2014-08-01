@@ -85,18 +85,8 @@ public final class SettingsHost {
 		//Magic Code!  Thanks, StackOverflow!
 		installDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		//setup
-<<<<<<< HEAD
-		char c;
         String s = "";
-		if(filePath != null){
-			cfgPath = filePath;
-		}else{
-			cfgPath = DEFAULT_CFGPATH;
-		}
-=======
-		String s ="";
 		cfgPath = Paths.get(CONFIG_FOLDER, CONFIG_FILENAME);
->>>>>>> 1b8262350ace64fec0a6bd4478a59f04c1b179a6
 		//Reading config file
 		//System.out.println("Settings Host is reading files.");
 		try {

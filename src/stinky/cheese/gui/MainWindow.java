@@ -63,6 +63,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
 
 import org.openimaj.image.DisplayUtilities;
+import org.openimaj.image.DisplayUtilities.ImageComponent;
 import org.openimaj.image.MBFImage;
 import org.openimaj.video.Video;
 import org.openimaj.video.VideoDisplay;
@@ -88,6 +89,8 @@ public class MainWindow {
 	String uName;
 	private static final String CONTACTFILE = "dat/contacts.txt";
 	public JList<String> list;
+	Video<MBFImage> video;
+	VideoDisplay<MBFImage> display;
 
 
 	/**
@@ -206,24 +209,25 @@ public class MainWindow {
 		JToggleButton tglbtnRecordAudio = new JToggleButton("Record Audio");
 		panel_3.add(tglbtnRecordAudio);
 		
-		Video<MBFImage> video = null;
+		
+		//TODO:OPENIMAJ!
+		
+		video = null;
     	
     	try {
 			video = new VideoCapture(640, 320);
 		} catch (VideoCaptureException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
-    	DisplayUtilities.ImageComponent screen = new DisplayUtilities.ImageComponent(true);
-    	screen.setAllowPanning(false);
-    	screen.setAllowZoom(false);
+    	ImageComponent screen = new ImageComponent(true, true);
     	
-    	VideoDisplay<MBFImage> display = VideoDisplay.createVideoDisplay(video, screen);
+    	display = VideoDisplay.createVideoDisplay(video, screen);
 		
 		JPanel panel_4 = new JPanel();
-		//panel_4.add(sceen);
+		panel_4.add(screen);
 		frame.getContentPane().add(panel_4, BorderLayout.CENTER);
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -231,15 +235,13 @@ public class MainWindow {
 		JMenu mnStinkycheese = new JMenu("StinkyCheese");
 		menuBar.add(mnStinkycheese);
 		
-<<<<<<< HEAD
 //		JMenuItem mntmSettings = new JMenuItem("Settings");
 //		mntmSettings.addActionListener(new SettingsListener(SettingsHost.getInstance()));
 //		mnStinkycheese.add(mntmSettings);
-=======
+
 		JMenuItem mntmSettings = new JMenuItem("Settings");
 		mntmSettings.addActionListener(new SettingsListener());
 		mnStinkycheese.add(mntmSettings);
->>>>>>> 1b8262350ace64fec0a6bd4478a59f04c1b179a6
 		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.addActionListener(new ExitListener(this));
