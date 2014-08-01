@@ -1,7 +1,7 @@
 Stinky_Cheese
 =============
 
-JAVA webcam interaction application for ARM devices
+JAVA webcam interaction application for Linux/ARM devices
 
 This project is far from completion, and as such lacks a proper readme.
 
