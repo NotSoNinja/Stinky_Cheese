@@ -208,9 +208,9 @@ public class MainWindow {
 		JMenu mnStinkycheese = new JMenu("StinkyCheese");
 		menuBar.add(mnStinkycheese);
 		
-		//JMenuItem mntmSettings = new JMenuItem("Settings");
-		//mntmSettings.addActionListener(new SettingsListener(SettingsHost.getInstance()));
-		//mnStinkycheese.add(mntmSettings);
+//		JMenuItem mntmSettings = new JMenuItem("Settings");
+//		mntmSettings.addActionListener(new SettingsListener(SettingsHost.getInstance()));
+//		mnStinkycheese.add(mntmSettings);
 		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.addActionListener(new ExitListener(this));

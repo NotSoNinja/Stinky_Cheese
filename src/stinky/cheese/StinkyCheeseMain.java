@@ -1,5 +1,10 @@
 package stinky.cheese;
 
+/* See MainWindow.java for an overview comment
+ * 
+ * This class just takes care of running things.  Not much to see here.
+ */
+
 import java.awt.EventQueue;
 
 import stinky.cheese.gui.MainWindow;
