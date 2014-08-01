@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui;
 
 /* Guess what this class does!  (It's a gui for adding contacts...)
  * 
@@ -20,8 +20,10 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import contacts.Contact;
-import contacts.ContactList;
+import stinky.cheese.contacts.Contact;
+import stinky.cheese.contacts.ContactList;
+import stinky.cheese.gui.listener.CancelListener;
+import stinky.cheese.gui.listener.UpdateContactListener;
 
 public class AddContactWindow extends JDialog {
 	/**
@@ -32,11 +34,11 @@ public class AddContactWindow extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	public static final boolean ADD_NEW = true;
 	public static final boolean EDIT = false;
-	JTextField txtName;
-	JTextField txtIpv;
-	JTextField txtIpv_1;
-	Contact c;
-	ContactList contacts;
+	public JTextField txtName;
+	public JTextField txtIpv;
+	public JTextField txtIpv_1;
+	public Contact c;
+	public ContactList contacts;
 	private MainWindow parent;
 
 	/**

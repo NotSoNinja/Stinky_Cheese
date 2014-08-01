@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui;
 
 /* WELCOME TO STINKY_CHEESE!
  * 
@@ -34,8 +34,6 @@ package userInterface;
  * 
  */
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
@@ -62,39 +60,27 @@ import java.awt.FlowLayout;
 import java.io.IOException;
 
 import javax.swing.JCheckBox;
-
-import contacts.Contact;
-import contacts.ContactList;
-
 import javax.swing.JScrollPane;
 
-import utility.SettingsHost;
+import stinky.cheese.SettingsHost;
+import stinky.cheese.contacts.Contact;
+import stinky.cheese.contacts.ContactList;
+import stinky.cheese.gui.listener.AddContactWindowListener;
+import stinky.cheese.gui.listener.EnterKeySendListener;
+import stinky.cheese.gui.listener.ExitListener;
+import stinky.cheese.gui.listener.RemoveContactListener;
+import stinky.cheese.gui.listener.SendListener;
 
 public class MainWindow {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField txtInputtext;
 	private JTextArea txtrOutputtext;
 	public ContactList contactlist;
 	String uName;
-	private static final String CONTACTFILE = "contacts.txt";
-	JList<String> list;
+	private static final String CONTACTFILE = "dat/contacts.txt";
+	public JList<String> list;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindow window = new MainWindow();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.

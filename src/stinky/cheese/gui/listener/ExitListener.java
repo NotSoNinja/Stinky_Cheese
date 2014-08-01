@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -13,20 +13,20 @@ package userInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JDialog;
+import stinky.cheese.gui.MainWindow;
 
-public class CancelListener implements ActionListener{
+public class ExitListener implements ActionListener{
+	MainWindow parent;
 	
-	JDialog parent;
-
-	CancelListener(JDialog w){
+	public ExitListener(MainWindow w){
+		super();
 		parent = w;
 	}
-	
+
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		parent.dispose();
+	public void actionPerformed(ActionEvent e) {
+		parent.quit();
+		
 	}
-	
 
 }

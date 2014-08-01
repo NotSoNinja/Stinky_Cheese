@@ -1,4 +1,4 @@
-package utility;
+package stinky.cheese;
 
 /* I sincerely apologize to whoever has to read this code.  It's a mess.
  * 
@@ -28,7 +28,7 @@ public final class SettingsHost {
 	private static SettingsHost settingsHostReference;
 	
 	//Config file
-	public static final String DEFAULT_CFGPATH = "settings.cfg";
+	public static final String DEFAULT_CFGPATH = "cfg/settings.cfg";
 	//General
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_NAME = "DEFAULT (Your IP)";

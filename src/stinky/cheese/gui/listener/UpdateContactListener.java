@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -13,14 +13,15 @@ package userInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import contacts.Contact;
+import stinky.cheese.contacts.Contact;
+import stinky.cheese.gui.AddContactWindow;
 
 public class UpdateContactListener implements ActionListener{
 	
 	AddContactWindow parent;
 	
 	
-	UpdateContactListener(AddContactWindow w){
+	public UpdateContactListener(AddContactWindow w){
 		parent = w;
 	}
 

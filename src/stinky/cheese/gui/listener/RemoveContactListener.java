@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -13,7 +13,8 @@ package userInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import contacts.Contact;
+import stinky.cheese.contacts.Contact;
+import stinky.cheese.gui.MainWindow;
 
 public class RemoveContactListener implements ActionListener {
 	

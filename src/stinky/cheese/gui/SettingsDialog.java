@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui;
 
 /* This is the current work-in-progress.  WARNING: DOES NOT SAVE SETTINGS YET!
  * 
@@ -35,12 +35,12 @@ import javax.swing.JSeparator;
 import javax.swing.JCheckBox;
 import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
-
 import javax.swing.JProgressBar;
 
-import utility.SettingsHost;
+import stinky.cheese.SettingsHost;
+import stinky.cheese.gui.listener.CancelListener;
 
-public class Settings extends JDialog{
+public class SettingsDialog extends JDialog{
 
 	/**
 	 * 
@@ -66,13 +66,13 @@ public class Settings extends JDialog{
 	private JRadioButton rdbtnEnglish;
 	private JToggleButton btnTest;
 	private JToggleButton toggleButton;
-	Settings thiswindow;
+	SettingsDialog thiswindow;
 	
 
 	/**
 	 * Create the dialog.
 	 */
-	public Settings() {
+	public SettingsDialog() {
 		thiswindow = this;
 		setBounds(100, 100, 450, 300);
 		setTitle("Settings");

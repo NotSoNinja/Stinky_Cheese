@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -13,11 +13,13 @@ package userInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import stinky.cheese.gui.MainWindow;
+
 public class SendListener implements ActionListener{
 
 	MainWindow parent;
 	
-	SendListener(MainWindow w){
+	public SendListener(MainWindow w){
 		parent = w;
 	}
 	

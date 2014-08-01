@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -12,6 +12,8 @@ package userInterface;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import stinky.cheese.gui.MainWindow;
 
 public class EnterKeySendListener implements KeyListener{
 	

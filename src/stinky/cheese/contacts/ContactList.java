@@ -1,4 +1,4 @@
-package contacts;
+package stinky.cheese.contacts;
 
 /* Yes, I know ArrayLists are inefficient.  Yes, I used one anyway.
  * 

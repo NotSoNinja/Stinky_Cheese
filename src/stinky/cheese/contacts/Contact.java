@@ -1,4 +1,4 @@
-package contacts;
+package stinky.cheese.contacts;
 
 /* This class is the core object behind Contacts in Stinky_Cheese.
  * It's really just a way to put all of a contact's data in one 

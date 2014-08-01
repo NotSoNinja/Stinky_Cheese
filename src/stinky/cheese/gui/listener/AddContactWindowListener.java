@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -15,7 +15,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
-import contacts.ContactList;
+import stinky.cheese.contacts.ContactList;
+import stinky.cheese.gui.AddContactWindow;
+import stinky.cheese.gui.MainWindow;
 
 public class AddContactWindowListener implements ActionListener{
 	
@@ -23,7 +25,7 @@ public class AddContactWindowListener implements ActionListener{
 	MainWindow parent;
 	boolean mode;
 	
-	AddContactWindowListener(MainWindow w, boolean type){
+	public AddContactWindowListener(MainWindow w, boolean type){
 		super();
 		parent = w;
 		contacts = parent.contactlist;

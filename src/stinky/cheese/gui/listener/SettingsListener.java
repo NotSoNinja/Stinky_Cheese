@@ -1,4 +1,4 @@
-package userInterface;
+package stinky.cheese.gui.listener;
 
 /* SHUT UP!  I KNOW!
  * 
@@ -15,9 +15,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
 
-import utility.SettingsHost;
+import stinky.cheese.gui.SettingsDialog;
 public class SettingsListener implements ActionListener {
-	private Settings s;
+	private SettingsDialog s;
 	
 	public SettingsListener(){
 	}
@@ -25,7 +25,7 @@ public class SettingsListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if(s == null){
 			try {
-				Settings dialog = new Settings();
+				SettingsDialog dialog = new SettingsDialog();
 				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				dialog.setVisible(true);
 			} catch (Exception ex) {
