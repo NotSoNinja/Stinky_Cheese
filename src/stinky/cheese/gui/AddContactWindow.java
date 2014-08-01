@@ -68,7 +68,7 @@ public class AddContactWindow extends JDialog {
 		}else{
 			c = parent.getListSelection();
 		}
-		System.out.println(c);
+		//System.out.println(c);
 		contacts = cons;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
