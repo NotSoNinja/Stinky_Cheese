@@ -77,6 +77,7 @@ import stinky.cheese.gui.listener.EnterKeySendListener;
 import stinky.cheese.gui.listener.ExitListener;
 import stinky.cheese.gui.listener.RemoveContactListener;
 import stinky.cheese.gui.listener.SendListener;
+import stinky.cheese.gui.listener.SettingsListener;
 
 public class MainWindow {
 
@@ -158,7 +159,6 @@ public class MainWindow {
 		gbc_txtrOutputtext.gridy = 0;
 		panel_1.add(scrollPane, gbc_txtrOutputtext);
 		
-		
 		JPanel panel_2 = new JPanel();
 		frame.getContentPane().add(panel_2, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
@@ -231,9 +231,15 @@ public class MainWindow {
 		JMenu mnStinkycheese = new JMenu("StinkyCheese");
 		menuBar.add(mnStinkycheese);
 		
+<<<<<<< HEAD
 //		JMenuItem mntmSettings = new JMenuItem("Settings");
 //		mntmSettings.addActionListener(new SettingsListener(SettingsHost.getInstance()));
 //		mnStinkycheese.add(mntmSettings);
+=======
+		JMenuItem mntmSettings = new JMenuItem("Settings");
+		mntmSettings.addActionListener(new SettingsListener());
+		mnStinkycheese.add(mntmSettings);
+>>>>>>> 1b8262350ace64fec0a6bd4478a59f04c1b179a6
 		
 		JMenuItem mntmQuit = new JMenuItem("Quit");
 		mntmQuit.addActionListener(new ExitListener(this));

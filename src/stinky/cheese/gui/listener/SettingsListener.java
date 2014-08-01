@@ -17,21 +17,16 @@ import javax.swing.JDialog;
 
 import stinky.cheese.gui.SettingsDialog;
 public class SettingsListener implements ActionListener {
-	private SettingsDialog s;
-	
 	public SettingsListener(){
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(s == null){
-			try {
-				SettingsDialog dialog = new SettingsDialog();
-				dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				dialog.setVisible(true);
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+		try {
+			SettingsDialog dialog = new SettingsDialog();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 	}
-
 }

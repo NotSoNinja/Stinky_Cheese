@@ -12,8 +12,6 @@ package stinky.cheese;
  * It's helpful to open "settings.cfg" alongside this to see how it works.
  */
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -22,13 +20,19 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Enumeration;
 
 public final class SettingsHost {
 	private static SettingsHost settingsHostReference;
-	
+
 	//Config file
-	public static final String DEFAULT_CFGPATH = "cfg/settings.cfg";
+	public static final String CONFIG_FOLDER = "cfg/";
+	public static final String CONFIG_FILENAME = "settings.cfg";
+	
 	//General
 	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_NAME = "DEFAULT (Your IP)";
@@ -47,12 +51,12 @@ public final class SettingsHost {
 	public static final int DEFAULT_RVOL = 50;
 	public static final String[] RESOLUTIONS = {"640x360", "854x480", "960x540", "1024x576", "1280x720"};
 	//The settings not represented above this line default to auto-detect.
-	
+
 	//where this file is
 	String installDirectory;
 	//Config file
-	String cfgPath;
-	
+	Path cfgPath;
+
 	String version;
 	//General
 	String language;
@@ -75,13 +79,13 @@ public final class SettingsHost {
 	String ipv4;
 	String ipv6;
 	String mask;
-	FileInputStream in;
 	boolean internetConnected;
-	
-	private SettingsHost(String filePath){
+
+	private SettingsHost(){
 		//Magic Code!  Thanks, StackOverflow!
 		installDirectory = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 		//setup
+<<<<<<< HEAD
 		char c;
         String s = "";
 		if(filePath != null){
@@ -89,41 +93,18 @@ public final class SettingsHost {
 		}else{
 			cfgPath = DEFAULT_CFGPATH;
 		}
+=======
+		String s ="";
+		cfgPath = Paths.get(CONFIG_FOLDER, CONFIG_FILENAME);
+>>>>>>> 1b8262350ace64fec0a6bd4478a59f04c1b179a6
 		//Reading config file
 		//System.out.println("Settings Host is reading files.");
 		try {
-            in = new FileInputStream(cfgPath);
-            //System.out.println("Settings Host created input byte stream.");
-        } catch (FileNotFoundException e) {
-        	//System.out.println("settings.cfg not found");
-        	File f = new File(cfgPath);
-        	try {
-        		//System.out.println("New settings.cfg created.");
-				f.createNewFile();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-           
-		} finally {
-			 try {
-				 //System.out.println("Beginning read-in...");
-				while((c = (char) in.read()) != -1){
-					s = s + c;
-					//System.out.println(s);
-					if(s.contains("#END")){
-						break;
-					}
-				}
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-            try {
-				in.close();
-				//System.out.println("Settings Host successfully completed read-in.");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Files.readAllLines(cfgPath, StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
 		//assigning file input to variables
 		//for efficiency's sake, we do this only once.
 		int picture = s.indexOf("#PICTURE");
@@ -187,7 +168,7 @@ public final class SettingsHost {
 			voltempstr = s.substring(s.indexOf("Send Volume: ", picture) + 13, s.indexOf('\n', s.indexOf("Send Volume: ", picture) + 13));
 			voltempstr = voltempstr.trim();			
 			try{
-			sendVolume = Integer.parseInt(voltempstr);
+				sendVolume = Integer.parseInt(voltempstr);
 			}catch (NumberFormatException e){
 				e.printStackTrace();
 			}
@@ -201,9 +182,9 @@ public final class SettingsHost {
 		}else{
 			recieveVolume = DEFAULT_RVOL;
 		}
-		
+
 		//NOT DONE YET! AUDIO AUTO-CONFIGS GO HERE!
-		
+
 		if(s.contains("IPv4: ")){
 			ipv4 = s.substring(s.indexOf("IPv4: ", picture) + 6, s.indexOf('\n', s.indexOf("IPv4: ", picture) + 6)).trim();
 			if(ipv4.equalsIgnoreCase("auto") || ipv4.equals("")){
@@ -235,19 +216,19 @@ public final class SettingsHost {
 		internetConnected = (ipv4 != null) || (ipv6 != null);
 		//System.out.println(this.toString());
 	}
-	
+
 	public static SettingsHost getInstance(){
 		if(settingsHostReference == null){
-			settingsHostReference = new SettingsHost(DEFAULT_CFGPATH);
+			settingsHostReference = new SettingsHost();
 		}
 		return settingsHostReference;
 	}
-	
+
 	//prints toString to a file
 	public boolean saveSettings(){
 		FileOutputStream out;
 		try {
-			out = new FileOutputStream(cfgPath);
+			out = new FileOutputStream(cfgPath.toFile());
 		} catch (FileNotFoundException e) {
 			return false;
 		}
@@ -270,7 +251,6 @@ public final class SettingsHost {
 	}
 	//The big red button
 	public void setAllDefaults(){
-		cfgPath = DEFAULT_CFGPATH;
 		language = DEFAULT_LANGUAGE;
 		name = DEFAULT_NAME;
 		vResolution = DEFAULT_VRES;
@@ -306,28 +286,28 @@ public final class SettingsHost {
 	}
 	//Magic code!  Thanks StackOverflow!
 	private static InetAddress getFirstNonLoopbackAddress(boolean preferIpv4, boolean preferIPv6) throws SocketException {
-	    Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
-	    while (en.hasMoreElements()) {
-	        NetworkInterface i = (NetworkInterface) en.nextElement();
-	        for (Enumeration<InetAddress> en2 = i.getInetAddresses(); en2.hasMoreElements();) {
-	            InetAddress addr = (InetAddress) en2.nextElement();
-	            if (!addr.isLoopbackAddress()) {
-	                if (addr instanceof Inet4Address) {
-	                    if (preferIPv6) {
-	                        continue;
-	                    }
-	                    return addr;
-	                }
-	                if (addr instanceof Inet6Address) {
-	                    if (preferIpv4) {
-	                        continue;
-	                    }
-	                    return addr;
-	                }
-	            }
-	        }
-	    }
-	    return null;
+		Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces();
+		while (en.hasMoreElements()) {
+			NetworkInterface i = (NetworkInterface) en.nextElement();
+			for (Enumeration<InetAddress> en2 = i.getInetAddresses(); en2.hasMoreElements();) {
+				InetAddress addr = (InetAddress) en2.nextElement();
+				if (!addr.isLoopbackAddress()) {
+					if (addr instanceof Inet4Address) {
+						if (preferIPv6) {
+							continue;
+						}
+						return addr;
+					}
+					if (addr instanceof Inet6Address) {
+						if (preferIpv4) {
+							continue;
+						}
+						return addr;
+					}
+				}
+			}
+		}
+		return null;
 	}
 	//GETTERS AND SETTERS! (nothing else beyond this point)
 	public String getProgramPath(){
@@ -523,7 +503,7 @@ public final class SettingsHost {
 			}else {
 				mask = "/" + masknum;
 			}
-			
+
 		} catch (SocketException e) {
 			mask = "null";
 			e.printStackTrace();
