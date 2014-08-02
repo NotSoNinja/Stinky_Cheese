@@ -61,8 +61,9 @@ import java.io.IOException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JScrollPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.DisplayUtilities.ImageComponent;
 import org.openimaj.image.MBFImage;
 import org.openimaj.video.Video;
@@ -91,6 +92,7 @@ public class MainWindow {
 	public JList<String> list;
 	Video<MBFImage> video;
 	VideoDisplay<MBFImage> display;
+	private JCheckBox chckbxVideo;
 
 
 	/**
@@ -193,7 +195,7 @@ public class MainWindow {
 		frame.getContentPane().add(panel_3, BorderLayout.NORTH);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JCheckBox chckbxVideo = new JCheckBox("Video");
+		chckbxVideo = new JCheckBox("Video");
 		panel_3.add(chckbxVideo);
 		
 		JToggleButton tglbtnCall = new JToggleButton("Call");
@@ -214,12 +216,6 @@ public class MainWindow {
 		
 		video = null;
     	
-    	try {
-			video = new VideoCapture(640, 320);
-		} catch (VideoCaptureException e) {
-			e.printStackTrace();
-		}
-    	
     	ImageComponent screen = new ImageComponent(true, true);
     	
     	display = VideoDisplay.createVideoDisplay(video, screen);
@@ -227,6 +223,22 @@ public class MainWindow {
 		JPanel panel_4 = new JPanel();
 		panel_4.add(screen);
 		frame.getContentPane().add(panel_4, BorderLayout.CENTER);
+		chckbxVideo.addChangeListener(new ChangeListener(){
+			public void stateChanged(ChangeEvent arg0) {
+				if(chckbxVideo.isSelected()){
+					((VideoCapture) video).stopCapture();
+				}else{
+					try {
+						video = new VideoCapture(640, 320);
+					} catch (VideoCaptureException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+		});
+		
+		//END OPENIMAJ
 		
 		
 		JMenuBar menuBar = new JMenuBar();
