@@ -57,6 +57,9 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JCheckBox;
@@ -65,6 +68,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.openimaj.image.DisplayUtilities.ImageComponent;
+import org.openimaj.image.ImageUtilities;
 import org.openimaj.image.MBFImage;
 import org.openimaj.video.Video;
 import org.openimaj.video.VideoDisplay;
@@ -235,6 +239,18 @@ public class MainWindow {
 					}
 				}
 				
+			}
+		});
+		
+		btnTakePicture.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				MBFImage snapshot = video.getNextFrame();
+				try {
+					ImageUtilities.write( snapshot, "png", new File("snapshot.png") );
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		
